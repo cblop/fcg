@@ -65,23 +65,44 @@ def drawPupils():
 
 
 def drawHead(tpoints):
-    """docstring for drawHead"""
+    """tpoints are leye, reye, lcheek, rcheek, chin"""
     color = (255,0,255)
-    points = [(6,4),(2,7),(2,20),(6,30),(11,32),(15,32),(20,30),(22,25),(23,20),(23,7),(20,4),(6,4)]
+    #points = [(6,4),(2,7),(2,20),(6,30),(11,32),(15,32),(20,30),(22,25),(23,20),(23,7),(20,4),(6,4)]
+    leye = tpoints[0]
+    reye = tpoints[1]
+    lcheek = tpoints[2]
+    rcheek = tpoints[3]
+    chin = tpoints [4]
+
+    points = []
+    points.extend([(leye[0] - 1, leye[1] - 8),(leye[0] - 1, leye[1] + 5)])
+    points.extend([(lcheek[0] - 3, lcheek[1] + 4), (lcheek[0] - 1, lcheek[1] + 9)])
+    points.extend([(chin[0] - 2, chin[1] + 1), (chin[0] + 2, chin[1] + 1)])
+    points.extend([(rcheek[0] + 1, rcheek[1] + 9), (rcheek[0] +3, rcheek[1] + 4)])
+    points.extend([(reye[0] + 1, reye[1] + 5), (reye[0] + 1, reye[1] - 8)])
+
     drawPoints(points, color)
 
 def drawEars():
     """docstring for drawEars"""
     color = (255,0,255)
-    leftear = [(2,11),(1,11),(0,12),(1,20),(2,20),(2,11)]
+    leftear = [(3,11),(2,11),(1,12),(2,20),(3,20),(3,11)]
     rightear = [(23,11),(24,11),(25,12),(24,20),(23,20),(23,11)]
     drawPoints(leftear, color)
     drawPoints(rightear, color)
 
-def drawHair():
-    """docstring for drawHair"""
+def drawHair(tpoints):
+    """tpoints: lfore, rfore, leye, reye"""
     color = (255,100,0)
-    points = [(6,1),(2,3),(2,7),(6,4),(20,4),(23,7),(23,4),(20,1),(6,1)]
+    lfore = tpoints[0]
+    rfore = tpoints[1]
+    leye = tpoints[2]
+    reye = tpoints[3]
+
+    #points = [(7,1),(3,3),(3,7),(7,4),(20,4),(23,7),(23,4),(20,1),(7,1)]
+    points = []
+    points.extend([(lfore[0], lfore[1] - 5), (lfore[0] - 3, lfore[1] -3), (leye[0] - 1, leye[1] - 8), (lfore[0], lfore[1] - 2)])
+    points.extend([(rfore[0], rfore[1] - 2), (reye[0] + 1, reye[1] - 8), (rfore[0] + 3, rfore[1] - 2), (rfore[0], rfore[1] - 5), (lfore[0], lfore[1] - 5)])
     drawPoints(points, color)
 
 def drawEyebrows():
@@ -93,7 +114,7 @@ def drawEyebrows():
     drawPoints(rightbrow, color)
 
 def refresh():
-  trackpoints = {'fore0':(6,6), 'fore1':(20,6), 'lbrow0':(6,10), 'lbrow1':(11,11),
+  trackpoints = {'lfore':(6,6), 'rfore':(20,6), 'lbrow0':(6,10), 'lbrow1':(11,11),
   'rbrow0':(15,11), 'rbrow1':(20,10), 'leye':(4,15), 'reye':(22,15), 'lcheek':(7,21),
   'rcheek':(19,21), 'nose':(13,20), 'tlip':(13,23), 'blip':(13,28), 'chin':(13,31)}
   count = 0
@@ -104,7 +125,9 @@ def refresh():
   headpoints = [trackpoints['leye'], trackpoints['reye'], trackpoints['lcheek'],
                 trackpoints['rcheek'], trackpoints['chin']]
   drawHead(headpoints)
-  drawHair()
+  hairpoints = [trackpoints['lfore'], trackpoints['rfore'],
+                trackpoints['leye'], trackpoints['reye']]
+  drawHair(hairpoints)
   drawNose()
   drawMouth()
   drawEyes()
