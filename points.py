@@ -4,8 +4,8 @@ import time
 class Face:
     def __init__(self, tpoints):
 
-        self.XSIZE = 24
-        self.YSIZE = 24
+        self.XSIZE = 1
+        self.YSIZE = 1
 
         self.tpoints = tpoints
         self.headpoints = [self.tpoints[6], self.tpoints[7], self.tpoints[8], self.tpoints[10], self.tpoints[13]]
@@ -44,14 +44,14 @@ class Face:
         for item in self.tpoints:
             point = (item[0] * self.XSIZE, item[1] * self.YSIZE)
             self.drawCross(point)
-        self.drawHead(self.headpoints)
-        self.drawHair(self.hairpoints)
-        self.drawEars(self.earpoints)
-        self.drawNose(self.nosepoint)
-        self.drawMouth(self.mouthPoints)
-        self.drawEyes(self.eyepoints)
-        self.drawPupils(self.eyepoints)
-        self.drawEyebrows(self.browPoints)
+        #self.drawHead(self.headpoints)
+        #self.drawHair(self.hairpoints)
+        #self.drawEars(self.earpoints)
+        #self.drawNose(self.nosepoint)
+        #self.drawMouth(self.mouthPoints)
+        #self.drawEyes(self.eyepoints)
+        #self.drawPupils(self.eyepoints)
+        #self.drawEyebrows(self.browPoints)
 
 
     def drawPoints(self, points, color):
@@ -64,8 +64,10 @@ class Face:
     def drawCross(self, points):
         """docstring for drawCross"""
         stroke(0,255,0)
-        xfactor = self.XSIZE / 4
-        yfactor = self.YSIZE / 4
+        #xfactor = self.XSIZE / 4
+        #yfactor = self.YSIZE / 4
+        xfactor = 5
+        yfactor = 5
         line(points[0] - xfactor, points[1], points[0] + xfactor, points[1]) 
         line (points[0], points[1] - yfactor, points[0], points[1] + yfactor)
 
@@ -237,8 +239,8 @@ def transpose(points):
 
 
 points = readFile('points6.txt')
-tpoints = transpose(points)
-face = Face(tpoints[0])
+#tpoints = transpose(points)
+face = Face(points[0])
 index = 0
 
 def setup():
@@ -251,10 +253,10 @@ def refresh():
   #print tpoints[0]
   global index
   global face
-  face.update(tpoints[index])
+  face.update(points[index])
   face.drawAll()
   index += 1
-  if index >= len(tpoints):
+  if index >= len(points):
     index = 0
   time.sleep(0.005)
 
