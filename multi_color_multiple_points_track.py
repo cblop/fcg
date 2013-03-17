@@ -70,6 +70,7 @@ while(1):
 		points.append(pt1)
 		points.append(pt2)
 		cv.Rectangle(color_image, pt1, pt2, cv.CV_RGB(255,0,0), 2)
+		print points
 
 ############### Line drawing part
 

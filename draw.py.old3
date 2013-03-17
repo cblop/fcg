@@ -1,5 +1,4 @@
 from pyprocessing import *
-from tracker import *
 import time
 
 class Face:
@@ -220,8 +219,7 @@ def readFile(filename):
     return frames
 
 def transpose(points):
-    #base = points[0]
-    base = points
+    base = points[0]
     print base
     ref = [(6.,6.),(20.,6.),(6.,10.),(11.,11.),(15.,11.),(20.,10.),(4.,15.),(22.,15.),
            (7.,21.), (13.,20.), (19.,21.), (13.,23.), (13.,27.), (13.,31.)]
@@ -238,10 +236,9 @@ def transpose(points):
     return points
 
 
-#points = readFile('points6.txt')
-tpoints = runTracking()
-#tpoints = transpose(points)
-face = Face(tpoints)
+points = readFile('points6.txt')
+tpoints = transpose(points)
+face = Face(tpoints[0])
 index = 0
 
 def setup():
@@ -254,10 +251,12 @@ def refresh():
   #print tpoints[0]
   global index
   global face
-  tpoints = runTracking()
-  print tpoints
-  face.update(tpoints)
+  face.update(tpoints[index])
   face.drawAll()
+  index += 1
+  if index >= len(tpoints):
+    index = 0
+  time.sleep(0.005)
 
 def draw():
     background(0)
