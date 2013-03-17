@@ -71,7 +71,7 @@ class Face:
         line (points[0], points[1] - yfactor, points[0], points[1] + yfactor)
 
     def drawNose(self, tpoints):
-        """docstring for drawNose"""
+        """draws the nose"""
         #points = [(11,19),(10,20),(11,21),(15,21),(16,20),(15,19)]
         nose = tpoints
         points = [(nose[0] - 2, nose[1] - 1), (nose[0] - 3, nose[1]),
